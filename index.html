@@ -75,6 +75,17 @@
       align-items: center;
       margin: 0 auto 10px auto;
     }
+    #Submit {
+      height: 60px;
+      width: 90%;
+      background: #73AD21;
+      border-radius: 25px;
+      padding: 20px;
+      display: block;
+      align-items: center;
+      margin: 0 auto 10px auto;
+    }
+    
   </style>
 </head>
 
@@ -92,10 +103,15 @@
       <input type="color" id="Color" name="Color" value="#73AD21" />
       <button id="heading2" style="border-radius: 25px; top:20px;" onclick="createnew()">Add Detail</button>
     </div>
+    <div id="submit">
+      <button id="heading2" onclick="submit()" style="border-radius: 25px;" >submit?</button>
+    </div>
   </div>
   <script>
+    num1 = 0
+    info = "I want you to give me a food recipe that follows the following standards: "
     document.getElementById("Addcontent").style.display = "none";
-
+  
     function myFunction() {
       var x = document.getElementById("Addcontent");
       if (x.style.display === "none") {
@@ -115,6 +131,7 @@
       newdiv.style = "height: 70px; width: 90%; border-radius: 25px; padding: 20px; display: block; align-items: center; margin: 0 auto 20px auto; font-family: 'Lucida Console', Monaco, monospace; font-size:20px; letter-spacing: 2px; word-spacing: 2px;";
       newdiv.innerHTML = imformation.value;
       newdiv.style.background = color.value;
+      newdiv.id = "contentt";
 
 
       let newimg = document.createElement("img");
@@ -123,9 +140,22 @@
       newimg.alt = "Delete";
       newimg.onclick = function () {
         this.parentElement.remove();
+        num1 = num1 - 1;
       }
       newdiv.appendChild(newimg);
       container.appendChild(newdiv);
+      num1 = num1 + 1;
+    }
+    function submit() {
+      for(let i = 1; i <= num1; i++){
+      infomod = info.concat(document.getElementById("contentt").innerHTML)
+      let position1 = infomod.search("<");
+      info = infomod.substring(0, position1);
+      info = info + ", ";
+      console.log(info);
+      document.getElementById("contentt").remove();
+      }
+      alert(info);
     }
 
 
